@@ -11,7 +11,7 @@ mongo = PyMongo(app)
 
 fruit_baskets = mongo.db.baskets
 
-# Make a list of all available fruits - this could be stored in a dictionary,
+# Make a list of all available fruits - this could be stored in the database,
 # but it's hardcoded for now
 all_fruits = [
     {
@@ -75,10 +75,15 @@ def submit_basket():
     basket_id = request.form.get('basket_id')
     basket = fruit_baskets.find_one({'_id': ObjectId(basket_id)})
     fruits_count = 0
+
+    # Update the quantity of each fruit in basket, according to user-entered
+    # form fields
     for fruit in basket['fruits']:
         quantity = int(request.form.get(fruit['name']))
         fruit['quantity'] = quantity
         fruits_count += quantity
+
+    # Update the count to be the sum of all fruits
     basket['fruits_count'] = fruits_count
     fruit_baskets.update_one(
         {'_id': ObjectId(basket_id)},
