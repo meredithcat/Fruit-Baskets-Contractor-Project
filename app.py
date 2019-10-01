@@ -28,6 +28,16 @@ all_fruits = [
         'name': 'watermelon',
         'cost': 3.00,
         'img_url': '/static/img/watermelon.png',
+    },
+    {
+        'name': 'avocado',
+        'cost': 2.00,
+        'img_url': '/static/img/avocado.png',
+    },
+    {
+        'name': 'pear',
+        'cost': 4.00,
+        'img_url': '/static/img/pear.png'
     }
 ]
 
