@@ -85,6 +85,8 @@ def submit_basket():
 
     # Update the count to be the sum of all fruits
     basket['fruits_count'] = fruits_count
+
+    # Update the database entry
     fruit_baskets.update_one(
         {'_id': ObjectId(basket_id)},
         {'$set': basket}
