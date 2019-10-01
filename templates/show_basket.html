@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<a href="/">Back to Home</a>
+
+<h1>{{basket.name}}</h1>
+
+
+<form action="/basket" method="POST">
+    <input type="hidden" name="basket_id" value="{{ basket._id }}">
+
+    {% if basket.fruits_count == 0 %}
+        <p>No items to show!</p>
+    {% else %}
+        <h2>Your items:</h2>
+
+        {% for fruit in basket.fruits %}
+            {% if fruit.quantity > 0 %}
+                <img src="{{ fruit.img_url }}" width="200px">
+                <input type="number" name="{{ fruit.name }}" value="{{ fruit.quantity }}">
+                <br>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <br><br>
+    <p>
+        <h2>Add some items:</h2>
+    </p>
+
+    {% for fruit in basket.fruits %}
+        {% if fruit.quantity == 0 %}
+            <img src="{{ fruit.img_url }}" width="200px">
+            <input type="number" name="{{ fruit.name }}" value="0">
+            <br>
+        {% endif %}
+    {% endfor %}
+
+    <br>
+    <button type="submit">Submit Changes!</button>
+</form>
+
+<br><br>
+
+<form action="/delete" method="POST">
+    <input type="hidden" name="basket_id" value="{{basket._id}}">
+    <button type="submit">Delete</button>
+</form>
+
+{% endblock %}

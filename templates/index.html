@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Fruits Baskets</h1>
+
+    <a href="/new">+ New Basket</a>
+
+    {% for basket in baskets %}
+    <p>
+        <a href="/basket/{{basket._id}}">
+            {{ basket.name }}
+        </a>
+    </p>
+    {% endfor %}
+{% endblock %}

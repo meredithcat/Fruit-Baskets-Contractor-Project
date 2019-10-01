@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<a href="/">Back to Home</a>
+
+<h1>New Fruit Basket</h1>
+
+<form action="/create" method="POST">
+    <fieldset>
+        <label for="name">Name: </label>
+        <input type="text" name="name"><br><br>
+
+        <label for="recipient">For: </label>
+        <input type="text" name="recipient"><br><br>
+
+        <button type="submit">Submit</button>
+    </fieldset>
+</form>
+
+{% endblock %}
