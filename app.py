@@ -1,15 +1,16 @@
 from flask import Flask, render_template, redirect, url_for, request
-from flask_pymongo import PyMongo
+from pymongo import MongoClient
 from bson.objectid import ObjectId
 from functools import reduce
 import os
 
 app = Flask(__name__)
 
-app.config["MONGO_URI"] = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/fruit_baskets')
-mongo = PyMongo(app)
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/fruit_baskets')
+client = MongoClient(host=f"{host}?retryWrites=false")
+db = client.get_default_database()
 
-fruit_baskets = mongo.db.baskets
+fruit_baskets = db.baskets
 
 # Make a list of all available fruits - this could be stored in the database,
 # but it's hardcoded for now
